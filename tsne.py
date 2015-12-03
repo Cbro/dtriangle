@@ -173,7 +173,35 @@ if __name__ == "__main__":
 
 	X = Math.loadtxt("wfile.txt");
 	labels = Math.loadtxt("lfile.txt");
+	docids = Math.loadtxt("dfile.txt");
 
-	Y = tsne(X, 2, 300, 20.0);
-	Plot.scatter(Y[:,0], Y[:,1], 20, labels);
-	Plot.show();
+	print docids
+
+	Y = tsne(X, 2, 300, 20.0);	
+	print Y 
+
+	f = open("two-d-file.txt", 'w')
+	i = 0
+	for vec in Y:
+		print vec[0]
+		print vec[1]
+		print "----"
+		f.write('%d %d %.10f %.10f\n' % ( docids[i], labels[i], vec[0], vec[1] ))
+		i += 1
+
+	f.close()
+		
+#	Plot.scatter(Y[:,0], Y[:,1], 20, labels);
+#	
+#	x_arr = Y[:,0]
+#	y_arr = Y[:,1]
+#
+#	print x_arr
+#
+#	for i, txt in enumerate(docids):
+#		txt = '%s-%s' % (txt,i)
+#		Plot.annotate( txt, (x_arr[i], y_arr[i]))
+#
+#	Plot.show();
+#
+#
